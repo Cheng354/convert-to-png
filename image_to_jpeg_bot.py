@@ -43,20 +43,23 @@ def run_web():
 # ---------- Bot handlers ----------
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "👋 Hi! Send me any image (PNG, WebP, BMP, GIF, etc.) "
-        "and I'll convert it to JPEG for you.\n\n"
-        "Tip: send it as a *photo* or as a *file/document* — both work."
+        "👋 សួស្តី! ខ្ញុំជា Bot បំលែងរូបភាពទៅជា JPEG។\n\n"
+        "📸 គ្រាន់តែផ្ញើរូបភាពមកខ្ញុំ (PNG, WebP, BMP, GIF ។ល។) "
+        "ខ្ញុំនឹងបំលែងវាទៅជា JPEG ភ្លាមៗ!\n\n"
+        "💡 គន្លឹះ: អ្នកអាចផ្ញើជា *រូបភាព* ឬ *ឯកសារ/ហ្វាល់* ក៏បានដែរ។\n\n"
+        "វាយ /help ដើម្បីមើលការណែនាំបន្ថែម។"
     )
 
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "📌 How to use:\n"
-        "1. Send me an image.\n"
-        "2. I'll reply with the JPEG version.\n\n"
-        "Commands:\n"
-        "/start - greeting\n"
-        "/help  - this message"
+        "📌 របៀបប្រើប្រាស់:\n\n"
+        "1️⃣ ផ្ញើរូបភាពមកខ្ញុំ\n"
+        "2️⃣ ខ្ញុំនឹងបំលែងវាទៅជា JPEG ហើយផ្ញើត្រឡប់ទៅអ្នកវិញ\n\n"
+        "📋 បញ្ជាដែលអាចប្រើបាន:\n"
+        "/start - ចាប់ផ្តើម\n"
+        "/help  - មើលការណែនាំ\n\n"
+        "❓ មានបញ្ហា? សាកល្បងផ្ញើរូបជាឯកសារ (file) ជំនួសវិញ។"
     )
 
 
@@ -91,11 +94,13 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_document(
             document=jpeg_buf,
             filename="converted.jpg",
-            caption="✅ Converted to JPEG",
+            caption="✅ បំលែងជា JPEG រួចរាល់!",
         )
     except Exception as e:
         logger.exception("Photo conversion failed")
-        await update.message.reply_text(f"❌ Sorry, conversion failed: {e}")
+        await update.message.reply_text(
+            f"❌ សុំទោស! ការបំលែងមិនបានជោគជ័យទេ។\nមូលហេតុ: {e}"
+        )
 
 
 async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -103,7 +108,8 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     doc = update.message.document
     if not doc.mime_type or not doc.mime_type.startswith("image/"):
         await update.message.reply_text(
-            "⚠️ That file isn't an image. Please send an image file."
+            "⚠️ ឯកសារនេះមិនមែនជារូបភាពទេ។\n"
+            "សូមផ្ញើតែឯកសារដែលជារូបភាពប៉ុណ្ណោះ។"
         )
         return
 
@@ -117,11 +123,13 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_document(
             document=jpeg_buf,
             filename=f"{original_name}.jpg",
-            caption="✅ Converted to JPEG",
+            caption="✅ បំលែងជា JPEG រួចរាល់!",
         )
     except Exception as e:
         logger.exception("Document conversion failed")
-        await update.message.reply_text(f"❌ Sorry, conversion failed: {e}")
+        await update.message.reply_text(
+            f"❌ សុំទោស! ការបំលែងមិនបានជោគជ័យទេ។\nមូលហេតុ: {e}"
+        )
 
 
 # ---------- Main ----------

@@ -31,7 +31,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ---------- Config ----------
-BOT_TOKEN = os.getenv("BOT_TOKEN", "PASTE_YOUR_TOKEN_HERE")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8781608884:AAEv_O12Eq53boV6WkgKVo_Ja5nf-yRc1H4")
 PORT = int(os.getenv("PORT", "10000"))
 STATS_FILE = "/tmp/bot_stats.json"
 

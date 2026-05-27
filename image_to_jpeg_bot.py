@@ -313,7 +313,7 @@ async def setup_commands(app):
 
 # ---------- Main ----------
 def main():
-    if not BOT_TOKEN or BOT_TOKEN == "8781608884:AAEv_O12Eq53boV6WkgKVo_Ja5nf-yRc1H4":
+     if not BOT_TOKEN or BOT_TOKEN == "PASTE_YOUR_TOKEN_HERE":
         raise RuntimeError("BOT_TOKEN not set! Set it as an environment variable on Render.")
 
     Thread(target=run_web, daemon=True).start()
